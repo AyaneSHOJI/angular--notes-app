@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Renderer2, Input } from '@angular/core';
 
 @Component({
   selector: 'app-note-card',
@@ -6,6 +6,9 @@ import { Component, ElementRef, OnInit, ViewChild, Renderer2 } from '@angular/co
   styleUrls: ['./note-card.component.scss']
 })
 export class NoteCardComponent implements OnInit {
+
+  @Input('title') title!: string;
+  @Input('body') body!: string;
 
   @ViewChild('truncator')
   truncator! : ElementRef<HTMLElement>;
@@ -15,8 +18,8 @@ export class NoteCardComponent implements OnInit {
   constructor(private renderer: Renderer2){
 
   }
-  ngOnInit(): void {
-    // work out if there is a text overflow and if not, then hide the truncato
+  ngOnInit() : void {
+    // work out if there is a text overflow and if not, then hide the truncator
 
     // get actual stye=le of #bodyText
     let style = window.getComputedStyle(this.bodyText.nativeElement, null);
